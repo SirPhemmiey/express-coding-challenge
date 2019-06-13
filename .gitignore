@@ -1,6 +1,8 @@
 # Dependency directories
 node_modules
 
+# Envronment
+.env
 # Logs
 logs
 *.log
@@ -10,3 +12,4 @@ yarn-error.log*
 
 # Coverage directory used by tools like istanbul
 coverage
+.nyc_output
