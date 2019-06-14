@@ -91,7 +91,7 @@ Required fields: `name`, `url`, `emailDomain`
 
 ## Get all Institutions:
 
-`GET /Institution/get`
+`GET /institution/get`
 
 No Authentication required, returns a success message and institution array
 
