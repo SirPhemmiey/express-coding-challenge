@@ -28,6 +28,9 @@ router.post('/books/add', addBook);
 
 router.get('/books/get', passport.authenticate('jwt', { session: false }), getBooks);
 
+router.get('/books', passport.authenticate('jwt', { session: false }), getBooks);
+
+
 router.post('/users/signin', async (req, res, next) => {
   passport.authenticate('signin', (err, user, info) => {
     try {

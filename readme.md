@@ -97,9 +97,9 @@ No Authentication required, returns a success message and institution array
 
 ## Get all books:
 
-`GET /books/get`
+`GET /books/get` OR `GET /books`
 
-No Authentication required, returns a success message and books array
+Authentication required, returns a success message and books array
 
 
 ### Running Test
