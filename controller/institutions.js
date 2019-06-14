@@ -56,9 +56,7 @@ const addInstitution = async (req, res) => {
       return res.status(code.UNPROCESSABLE_ENTITY).json({
         status: message.FAIL,
         code: code.UNPROCESSABLE_ENTITY,
-        data: {
-          message: message.ALREADY_EXIST
-        }
+        message: message.ALREADY_EXIST
       });
     }
     await institution.save();

@@ -30,7 +30,7 @@ describe('Books Operations', () => {
       .get('/books/get')
       .set('Authorization', `Bearer ${token}`)
       .expect('Content-Type', /json/)
-      .expect(200)
+      .expect(code.OK)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body.status).to.eq(message.SUCCESS);
@@ -53,8 +53,9 @@ describe('Books Operations', () => {
       .expect(201)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.body.message).to.eq(message.SUCCESS);
         expect(res.body.status).to.eq(message.SUCCESS);
+        expect(res.body.data).to.have.key(['message']);
+        expect(res.body.data.message).to.eq(message.SUCCESS);
         expect(res.body).to.be.an('object');
         return done();
       });

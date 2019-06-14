@@ -15,6 +15,7 @@ const create = async (req, res) => {
   if (error) {
     logger.error(error);
     return res.status(code.INVALID_INPUT_PARAMS).json({
+      status: message.FAIL,
       code: code.INVALID_INPUT_PARAMS,
       message: error.details[0].message
     });
@@ -26,6 +27,7 @@ const create = async (req, res) => {
     const userExist = await User.findOne({ email });
     if (userExist) {
       return res.status(code.UNPROCESSABLE_ENTITY).json({
+        status: message.FAIL,
         code: code.UNPROCESSABLE_ENTITY,
         message: message.ALREADY_EXIST
       });
@@ -45,11 +47,14 @@ const create = async (req, res) => {
         });
         await user.save();
         res.status(code.CREATED).json({
-          code: code.CREATED,
-          message: message.SUCCESS
+          status: message.SUCCESS,
+          data: {
+            message: message.SUCCESS
+          }
         });
       } else {
         return res.status(code.INTERNAL_SERVER_ERROR).json({
+          status: message.FAIL,
           code: code.INTERNAL_SERVER_ERROR,
           message: message.DOMAIN_DOES_NOT_EXIST
         });
@@ -58,6 +63,7 @@ const create = async (req, res) => {
   } catch (error) {
     logger.error(error);
     res.status(code.INTERNAL_SERVER_ERROR).json({
+      status: message.FAIL,
       code: code.INTERNAL_SERVER_ERROR,
       message: error.message
     });

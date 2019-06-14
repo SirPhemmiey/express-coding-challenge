@@ -74,6 +74,7 @@ const addBook = async (req, res) => {
     logger.error(error);
     return res.status(code.INVALID_INPUT_PARAMS).json({
       status: message.FAIL,
+      code: code.INVALID_INPUT_PARAMS,
       message: error.details[0].message
     });
   }
@@ -101,7 +102,9 @@ const addBook = async (req, res) => {
     });
     res.status(code.CREATED).json({
       status: message.SUCCESS,
-      message: message.SUCCESS
+      data: {
+        message: message.SUCCESS
+      }
     });
   } catch (error) {
     logger(error);
