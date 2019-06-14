@@ -11,7 +11,7 @@
 * Navigate to the project directory ```cd express-coding-challenge```
 * Run: ```npm install``` or ```yarn``` to install dependencies
 * Create a .env file in your root directory and copy content from ```.env.sample``` file to ```.env``` file and set environment variables with the appropriate values
-* Set your approprate mongoDb connection
+* Configure your approprate mongoDb and redis connection
 
 
 ### Running

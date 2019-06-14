@@ -1,3 +1,3 @@
-// require('./book.test');
+require('./book.test');
 
 require('./user.test');

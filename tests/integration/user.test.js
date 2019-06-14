@@ -26,27 +26,26 @@ describe('User Operations', () => {
       });
   });
 
-
-  // it('Should create a new user', function (done) {
-  //   this.timeout(5000);
-  //   const userData = {
-  //     name: 'Peter John',
-  //     email: 'peterjohn@kwasu.edu.ng',
-  //     role: 'student',
-  //     password: '12345'
-  //   };
-  //   request(app)
-  //     .post('/users/create')
-  //     .send(userData)
-  //     .expect(code.CREATED)
-  //     .end((err, res) => {
-  //       if (err) return done(err);
-  //       expect(res.body.code).to.eq(201);
-  //       expect(res.body).to.have.key(['code', 'message']);
-  //       expect(res.body.message).to.be.eq(message.SUCCESS);
-  //       return done();
-  //     });
-  // });
+  it('Should create a new user', function (done) {
+    this.timeout(5000);
+    const userData = {
+      name: 'Peter John',
+      email: 'peterjohn@kwasu.edu.ng',
+      role: 'student',
+      password: '12345'
+    };
+    request(app)
+      .post('/users/create')
+      .send(userData)
+      .expect(code.CREATED)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.code).to.eq(201);
+        expect(res.body).to.have.key(['code', 'message']);
+        expect(res.body.message).to.be.eq(message.SUCCESS);
+        return done();
+      });
+  });
 
   it('Should throw an error if the email exist', function (done) {
     this.timeout(5000);
