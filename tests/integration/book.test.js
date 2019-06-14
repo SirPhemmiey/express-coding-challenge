@@ -1,6 +1,8 @@
 const request = require('supertest');
 const { expect } = require('chai');
 const app = require('../../index');
+const code = require('../../constants/codes');
+const message = require('../../constants/messages');
 
 let token = null;
 describe('Books Operations', () => {
@@ -17,7 +19,7 @@ describe('Books Operations', () => {
         if (err) return done(err);
         token = res.body.data.token;
         expect(res.body.data.token).to.be.not.empty;
-        expect(res.body.status).to.eq('success');
+        expect(res.body.status).to.eq(message.SUCCESS);
         expect(res.body).to.be.an('object');
         return done();
       });
@@ -31,7 +33,7 @@ describe('Books Operations', () => {
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.body.status).to.eq('success');
+        expect(res.body.status).to.eq(message.SUCCESS);
         expect(res.body.data).to.have.key(['books']);
         expect(res.body.data.books).to.be.an('array');
         return done();
@@ -48,10 +50,29 @@ describe('Books Operations', () => {
     request(app)
       .post('/books/add')
       .send(bookData)
+      .expect(201)
       .end((err, res) => {
         if (err) return done(err);
-        expect(res.body.message).to.eq('success');
-        expect(res.body.status).to.eq('success');
+        expect(res.body.message).to.eq(message.SUCCESS);
+        expect(res.body.status).to.eq(message.SUCCESS);
+        expect(res.body).to.be.an('object');
+        return done();
+      });
+  });
+
+  it('Should throw a missing argument error', (done) => {
+    const bookData = {
+      isbn: '978-055359370121',
+      author: 'Dan More',
+      title: 'Mister'
+    };
+    request(app)
+      .post('/books/add')
+      .send(bookData)
+      .expect(code.INVALID_INPUT_PARAMS)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.status).to.eq(message.FAIL);
         expect(res.body).to.be.an('object');
         return done();
       });

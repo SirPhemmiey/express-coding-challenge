@@ -71,7 +71,7 @@ const addBook = async (req, res) => {
     isbn, title, author, institution
   } = req.body;
   if (error) {
-    logger(error);
+    logger.error(error);
     return res.status(code.INVALID_INPUT_PARAMS).json({
       status: message.FAIL,
       message: error.details[0].message
