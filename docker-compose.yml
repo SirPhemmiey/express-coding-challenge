@@ -1,0 +1,44 @@
+version: "3.5"
+
+volumes: 
+  mongo-data: 
+  redis-data: 
+
+services: 
+  bib-challenge:
+    container_name: bib-challenge
+    build: 
+      context: .
+    env_file: 
+      - .env
+    environment: 
+      MONGODB_URL: mongodb://mongo/bib-challenge
+      PORT: 80
+    restart: always
+    ports: 
+      - "80:80"
+    depends_on: 
+      - redis
+    links: 
+      - mongo
+      - redis
+  mongo: 
+    container_name: bib-mongodb
+    image: mongo
+    volumes: 
+      - mongo-data:/data/db
+    ports: 
+      - "27017:27017"
+    restart: always
+  redis: 
+    container_name: bib-redis
+    image: redis
+    environment: 
+      REDIS_HOST: 127.0.0.1
+      REDIS_PORT: 6379 
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes: 
+      - redis-data:/data/redis
+    ports: 
+      - "6379:6379"
+    restart: always
