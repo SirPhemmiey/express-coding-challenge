@@ -3,7 +3,7 @@
 ## Prerequisites
 
 * [Node.JS (10.12 or higher)](https://nodejs.org/en/)
-* [MySQL (5.7 or higher)](https://www.mysql.com/downloads/)
+* [MongoDB](https://www.mongodb.com/)
 * [Redis](https://redis.io/)
 
 ### Installing
