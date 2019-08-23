@@ -19,10 +19,10 @@ const logger = require('../helpers/winston');
 dotenv.config();
 
 const { REDIS_PORT, REDIS_HOST } = process.env;
-// const client = redis.createClient(REDIS_PORT, REDIS_HOST);
-const client = redis.createClient({
-    host: 'redis'
-});
+const client = redis.createClient(REDIS_PORT, REDIS_HOST);
+// const client = redis.createClient({
+//     host: 'redis'
+// });
 
 client.on('ready', function() {
     console.log("Redis is running");
@@ -124,7 +124,7 @@ const addBook = async(req, res) => {
             }
         });
     } catch (error) {
-        logger(error);
+        logger.error(error);
         res.status(code.INTERNAL_SERVER_ERROR).json({
             status: message.FAIL,
             code: code.INTERNAL_SERVER_ERROR,
@@ -136,4 +136,4 @@ const addBook = async(req, res) => {
 module.exports = {
     addBook,
     getBooks
-};
+}
